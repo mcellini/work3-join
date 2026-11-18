@@ -1,0 +1,7 @@
+/* Public fonts only (all SIL OFL 1.1): Inter + Inter Tight (UI), IBM Plex Serif (editorial headlines), Caveat (hand notes). */
+@font-face { font-family: "Inter"; src: url("/fonts/InterVariable.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url("/fonts/InterVariable-Italic.woff2") format("woff2"); font-weight: 400 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Inter Tight"; src: url("/fonts/InterTight-Variable.woff2") format("woff2"); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Serif"; src: url("/fonts/IBMPlexSerif-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "IBM Plex Serif"; src: url("/fonts/IBMPlexSerif-SemiBoldItalic.ttf") format("truetype"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Caveat"; src: url("/fonts/Caveat.ttf") format("truetype"); font-weight: 400 700; font-style: normal; font-display: swap; }

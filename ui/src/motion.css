@@ -1,0 +1,78 @@
+/* Motion system. One curve, transform + opacity only. Resting frames (no animation) = reduced-motion state. */
+:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
+
+.js .reveal { opacity: 0; transform: translateY(32px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); transition-delay: calc(min(var(--i, 0) * 60ms, 360ms)); }
+.js .reveal[data-shown] { opacity: 1; transform: none; }
+.js .reveal[data-done] { transition-delay: 0ms; }
+
+/* hero entrance on load */
+.js .rise { animation: rise 900ms var(--ease) both; animation-delay: calc(var(--i, 0) * 80ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+/* masked line pull-up (h1) */
+.line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.js .line-up { display: block; animation: line-up 900ms var(--ease) both; animation-delay: calc(80ms + var(--l, 0) * 90ms); }
+@keyframes line-up { from { transform: translateY(105%); } }
+@keyframes fade { from { opacity: 0; } }
+
+/* hover language: lift + border tint, press */
+.lift { transition: transform 500ms var(--ease), box-shadow 300ms var(--ease), border-color 300ms var(--ease); }
+@media (hover: hover) { .lift:hover { transform: translateY(-2px); } }
+.press:active { transform: scale(0.98); }
+
+/* loops pause off screen */
+.loop:not([data-play]), .loop:not([data-play]) * { animation-play-state: paused !important; }
+
+/* ---------- signature: the start-here window (question <-> essay) ---------- */
+.sh-ind { transition: transform 500ms var(--ease); }
+.sh[data-mode="essay"] .sh-ind { transform: translateX(100%); }
+.sh-st { transition: opacity 300ms var(--ease), transform 400ms var(--ease); transition-delay: calc(var(--r, 0) * 80ms); }
+.sh[data-mode="question"] .sh-e, .sh[data-mode="essay"] .sh-q { opacity: 0; transform: translateY(6px); pointer-events: none; }
+.sh-tab { transition: color 300ms var(--ease); }
+
+/* guest marquee */
+.marquee { animation: marquee 60s linear infinite; }
+.marquee-wrap:hover .marquee { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* guarantee seal */
+.seal-ring { animation: spin 24s linear infinite; transform-origin: 50% 50%; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+/* ---------- hand-drawn layer: doodles draw on, notes write in, faces pop ---------- */
+/* draw-on = clip-path wipe along the stroke (artwork is outlined fills). x: left to right, y: top to bottom, r: right to left */
+.js .draw-x { clip-path: inset(-10% 100% -10% -10%); }
+.js .draw-y { clip-path: inset(-10% -10% 100% -10%); }
+.js .draw-r { clip-path: inset(-10% -10% -10% 100%); }
+.js .draw { transition: clip-path 900ms var(--ease) var(--d, 0ms); }
+.js .draw[data-shown] { clip-path: inset(-10%); }
+.js .draw-load { animation: draw-on 900ms var(--ease) var(--d, 0ms) both; }
+.js .draw-load.draw-x { animation-name: draw-on-x; }
+.js .draw-load.draw-y { animation-name: draw-on-y; }
+@keyframes draw-on-x { from { clip-path: inset(-10% 100% -10% -10%); } to { clip-path: inset(-10%); } }
+@keyframes draw-on-y { from { clip-path: inset(-10% -10% 100% -10%); } to { clip-path: inset(-10%); } }
+/* notes: a small written-in fade with a settle of the tilt */
+.js .note { opacity: 0; transform: translateY(6px) rotate(var(--tilt, -3deg)); transition: opacity 500ms var(--ease) var(--d, 0ms), transform 700ms var(--ease) var(--d, 0ms); }
+.js .note[data-shown] { opacity: 1; transform: rotate(var(--tilt, -3deg)); }
+.js .note-load { animation: note-in 700ms var(--ease) var(--d, 0ms) both; }
+.hand-note { transform: rotate(var(--tilt, -3deg)); transform-origin: left center; }
+@keyframes note-in { from { opacity: 0; transform: translateY(6px) rotate(var(--tilt, -3deg)); } to { opacity: 1; transform: rotate(var(--tilt, -3deg)); } }
+/* faces: gentle pop with a little overshoot, once */
+.js .pop { opacity: 0; transform: scale(0.6) rotate(-12deg); transition: opacity 300ms var(--ease) var(--d, 0ms), transform 700ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0ms); }
+.js .pop[data-shown] { opacity: 1; transform: rotate(var(--tilt, 6deg)); }
+
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .js .draw, .js .draw-x, .js .draw-y, .js .draw-r, .js .draw-load { clip-path: none !important; animation: none !important; transition: none !important; }
+  .js .note, .js .note-load { animation: none !important; opacity: 1; transform: rotate(var(--tilt, -3deg)); transition: none; }
+  .js .pop { opacity: 1; transform: rotate(var(--tilt, 6deg)); transition: none; }
+  
+  .js .reveal { transform: none !important; transition-property: opacity; }
+  .js .rise { animation-name: fade; }
+  .js .line-up { animation: none; }
+  .marquee, .seal-ring { animation: none !important; }
+  .sh-ind, .sh-st { transition-duration: 0ms !important; transition-delay: 0ms !important; }
+  .lift:hover { transform: none; }
+}

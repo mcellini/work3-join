@@ -1,0 +1,16 @@
+/* Work3 landing. Same stack and motion system as the Refactoring sales page template; theme in ./theme.css. */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "./fonts.css";
+@import "./theme.css";
+@import "./motion.css";
+
+@theme { --ease-out-weighted: cubic-bezier(0.22, 1, 0.36, 1); }
+@layer utilities { .font-display { font-weight: 600; } }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { -webkit-font-smoothing: antialiased; background: var(--background); }
+/* overscroll at the top shows the forest hero, at the bottom the footer */
+html { background: linear-gradient(to bottom, var(--primary) 50%, var(--background) 50%); }
+.fade-out { -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); }

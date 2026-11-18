@@ -1,0 +1,96 @@
+/* Work3 theme for shadcn/ui (Tailwind v4). Replaces the template's vendored Refactoring theme (brand/shadcn.css).
+ * Restrained editorial palette: forest #0E2A1E, mint #8AE1A2, cream #F5F2EA. No ad images or ad angles are used.
+ * Tailwind's default colour families are used for the topic tones (palette.ts). */
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: "Inter Tight", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --color-forest-50: #F1F6F3;
+  --color-forest-100: #DCEBE2;
+  --color-forest-200: #B9D7C5;
+  --color-forest-700: #1F5A40;
+  --color-forest-800: #163F2D;
+  --color-forest-900: #0E2A1E;
+  --color-forest-950: #081A12;
+  --color-mint: #8AE1A2;
+  --color-mint-soft: #DDF5E3;
+  --color-cream: #F5F2EA;
+  --text-sm--letter-spacing: -0.01em;
+  --text-base--letter-spacing: -0.01em;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #FBFAF6;
+  --foreground: #0E2A1E;
+  --card: #FFFFFF;
+  --card-foreground: #0E2A1E;
+  --popover: #FFFFFF;
+  --popover-foreground: #0E2A1E;
+  --primary: #0E2A1E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #DDF5E3;
+  --secondary-foreground: #0E2A1E;
+  --muted: #F0ECE2;
+  --muted-foreground: #4E5F56;
+  --accent: #DDF5E3;
+  --accent-foreground: #0E2A1E;
+  --destructive: #C0262D;
+  --destructive-foreground: #FFFFFF;
+  --border: #E2DDD0;
+  --input: #CFC9BA;
+  --ring: #1F5A40;
+  /* app accent (used as bg-app-tint / text-app-ink like in the template) */
+  --app-color: #8AE1A2;
+  --app-light: #DDF5E3;
+  --app-tint: #EEF9F1;
+  --app-ink: #1F5A40;
+  --font-hand-family: "Caveat", "Inter Tight", cursive;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-app: var(--app-color);
+  --color-app-light: var(--app-light);
+  --color-app-tint: var(--app-tint);
+  --color-app-ink: var(--app-ink);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+/* hand notes: Caveat, accents only */
+@utility font-hand {
+  font-family: var(--font-hand-family);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; font-weight: 400; letter-spacing: -0.01em; }
+  html { @apply font-sans; font-optical-sizing: auto; }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "work3-landing",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run dev -w ui",
+    "build": "npm run build -w ui",
+    "preview": "npm run preview -w ui",
+    "shots": "node scripts/shoot.mjs"
+  },
+  "workspaces": ["ui"]
+}
