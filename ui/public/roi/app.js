@@ -7,7 +7,7 @@
     CONTENT_NAME: "adoption_roi_calculator",
     // EU/UK consent banner switch. false = pixel loads for everyone (current default, pending Matteo's decision).
     // true  = EU/UK visitors (detected by browser timezone) get the pixel only after clicking Accept.
-    CONSENT_BANNER_ENABLED: false
+    CONSENT_BANNER_ENABLED: true
   };
 
   var $ = function (id) { return document.getElementById(id); };
