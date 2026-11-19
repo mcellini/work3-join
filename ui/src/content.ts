@@ -1,6 +1,7 @@
 // All copy, numbers and links for the Work3 landing page live here, so a decision from Matteo is a one-line change.
 // Every claim is public on wrk3.substack.com (About page + posts, checked 6 Nov 2026).
 // Sources and publication checks: ../../SOURCES.md and ../../PENDING.md.
+import { storedParams } from "@/lib/pixel"
 import type { RowIcon } from "@/components/landing/icons"
 
 export const SUBSTACK = "https://wrk3.substack.com"
@@ -8,14 +9,18 @@ export const SUBSTACK = "https://wrk3.substack.com"
 // Matteo confirmed 30,000+ subscribers on 6 Nov 2026.
 export const SUBSCRIBERS = "30,000+"
 
-// Every CTA goes to Substack's free subscribe page. The visitor's own utm_* params are forwarded so Substack's stats
-// show the ad source (fallback utm_source=work3-landing&utm_medium=landing-page). No cookies, no analytics on this page.
+// Every CTA goes to Substack's free subscribe page. EVERY incoming URL param (fbclid, utm_*, anything else) is forwarded,
+// persisted in sessionStorage (shared with /roi/), so Substack's pixel can credit the ad. Fallback utm only if no utm_* at all.
+// The Meta pixel loads behind the EU/UK consent banner: see src/lib/pixel.ts.
 const DEFAULT_UTM: Record<string, string> = { utm_source: "work3-landing", utm_medium: "landing-page" }
 function utm() {
   const out = new URLSearchParams()
-  const incoming = typeof location !== "undefined" ? new URLSearchParams(location.search) : new URLSearchParams()
-  for (const [k, v] of incoming) if (k.startsWith("utm_")) out.set(k, v)
-  if (![...out.keys()].length) for (const [k, v] of Object.entries(DEFAULT_UTM)) out.set(k, v)
+  if (typeof location !== "undefined") {
+    const all = { ...storedParams() }
+    new URLSearchParams(location.search).forEach((v, k) => { if (k !== "email") all[k] = v })
+    for (const [k, v] of Object.entries(all)) out.set(k, v)
+  }
+  if (![...out.keys()].some((k) => k.startsWith("utm_"))) for (const [k, v] of Object.entries(DEFAULT_UTM)) out.set(k, v)
   return out.toString()
 }
 export const links = {

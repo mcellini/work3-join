@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react"
+import { ConsentBanner } from "@/components/landing/ConsentBanner"
 import {
   ArrowRightIcon, ArrowUpRightIcon, BrainIcon, CheckCircleIcon, EnvelopeSimpleIcon, LockKeyOpenIcon, NewspaperIcon, QuotesIcon,
   SealQuestionIcon, ShieldCheckIcon, SignOutIcon, UserCircleIcon, UsersIcon, UsersThreeIcon, type Icon,
@@ -458,6 +459,7 @@ export default function App() {
         <Final />
       </main>
       <Footer />
+      <ConsentBanner />
     </>
   )
 }
