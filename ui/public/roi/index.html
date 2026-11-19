@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI ROI reality check for CFOs · Work3</title>
+<meta name="description" content="Compare the AI adoption you report with the adoption you can see, and what that does to the real ROI of your AI licences.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://join.work3.ai/roi/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+<header class="brand">Work3</header>
+
+<main>
+<section id="intro">
+ <h1>You bought the AI licences. What are they really returning?</h1>
+ <p class="sub">Compare the adoption you report with the adoption you can see in your admin console. 8 inputs, 60 seconds, no signup needed to start.</p>
+ <ul class="pts"><li>Declared vs actual adoption</li><li>Real ROI</li><li>Unused licence spend</li><li>Break-even hours per user</li></ul>
+ <a class="btn" id="cta-start" href="#form-section">Run the reality check →</a>
+ <p class="trust">From Work3, read by 30,000+ leaders on the future of work and AI in organisations.</p>
+</section>
+
+<section id="form-section" style="margin-top:40px">
+<form id="roi-form" novalidate autocomplete="off">
+ <div class="field"><label for="cur">Currency (display only, no conversion)</label>
+  <select id="cur"><option value="$">$ (USD)</option><option value="€">€ (EUR)</option></select></div>
+
+ <fieldset><legend>Spend</legend>
+  <div class="field"><label for="S">Paid AI seats / licences</label><input id="S" inputmode="decimal" required aria-describedby="S-h S-e"><span class="hint" id="S-h">Total seats you pay for across AI tools.</span><span class="err" id="S-e" role="alert"></span></div>
+  <div class="field"><label for="C">Cost per seat per month</label><input id="C" inputmode="decimal" required aria-describedby="C-e"><span class="err" id="C-e" role="alert"></span></div>
+  <div class="field"><label for="O">Other annual AI spend <span class="tag">assumption, edit me</span></label><input id="O" inputmode="decimal" value="0" aria-describedby="O-h O-e"><span class="hint" id="O-h">Implementation, training, integrations. Default 0.</span><span class="err" id="O-e" role="alert"></span></div>
+ </fieldset>
+
+ <fieldset><legend>Adoption</legend>
+  <div class="field"><label for="Ad">Declared adoption (%) <span class="tag">assumption, edit me</span></label><input id="Ad" inputmode="decimal" value="80" aria-describedby="Ad-h Ad-e"><span class="hint" id="Ad-h">Share of seats you assume or report as active.</span><span class="err" id="Ad-e" role="alert"></span></div>
+  <div class="field"><label for="Aa">Actual adoption (%)</label><input id="Aa" inputmode="decimal" required aria-describedby="Aa-h Aa-e"><span class="hint" id="Aa-h">Share of seats active weekly, from admin dashboards. Check the admin console. If you don't know, enter your best guess.</span><span class="err" id="Aa-e" role="alert"></span></div>
+ </fieldset>
+
+ <fieldset><legend>Value</legend>
+  <div class="field"><label for="H">Hours saved per active user per week <span class="tag">assumption, edit me</span></label><input id="H" inputmode="decimal" value="2" aria-describedby="H-e"><span class="err" id="H-e" role="alert"></span></div>
+  <div class="field"><label for="W">Fully loaded hourly cost of those users</label><input id="W" inputmode="decimal" required aria-describedby="W-e"><span class="err" id="W-e" role="alert"></span></div>
+  <div class="field"><label for="R">Share of saved time that becomes real value (%) <span class="tag">assumption, edit me</span></label><input id="R" inputmode="decimal" value="50" aria-describedby="R-h R-e"><span class="hint" id="R-h">Saved time only creates value if it is redeployed.</span><span class="err" id="R-e" role="alert"></span></div>
+  <details><summary>Advanced</summary>
+   <div class="field" style="margin-top:12px"><label for="Wk">Working weeks per year <span class="tag">assumption, edit me</span></label><input id="Wk" inputmode="decimal" value="46" aria-describedby="Wk-e"><span class="err" id="Wk-e" role="alert"></span></div>
+  </details>
+ </fieldset>
+ <div id="warn" class="warnbox hidden" role="status"></div>
+ <button class="btn" type="submit" id="submit-inputs">Continue</button>
+ <p class="note">Defaults are editable assumptions, not data. Your numbers never leave your browser.</p>
+</form>
+</section>
+
+<section id="gate" class="card hidden" style="margin-top:24px" tabindex="-1">
+ <h2>See your real ROI</h2>
+ <form id="gate-form" novalidate>
+  <div class="field"><label for="email">Work email</label><input id="email" type="email" inputmode="email" autocomplete="email" aria-describedby="email-e"><span class="err" id="email-e" role="alert"></span></div>
+  <button class="btn" type="submit">See your real ROI</button>
+  <p class="note">By continuing you'll get your results and can confirm a free subscription to the Work3 newsletter. Unsubscribe anytime. <a href="/privacy/">Privacy</a></p>
+ </form>
+ <p><button class="btn ghost" type="button" id="skip">Just show my results</button></p>
+</section>
+
+<section id="results" class="hidden" aria-live="polite" tabindex="-1">
+ <h2 style="margin-top:32px">Your results</h2>
+ <div id="subscribe-fallback" class="warnbox hidden noprint"><a class="btn" id="confirm-link" target="_blank" rel="noopener" href="#">Confirm your free Work3 subscription →</a></div>
+ <div class="two">
+  <div class="card"><div class="note">On paper</div><div class="big" id="r-droi"></div><div id="r-dval" class="note"></div></div>
+  <div class="card"><div class="note">In practice</div><div class="big" id="r-rroi"></div><div id="r-rval" class="note"></div></div>
+ </div>
+ <p id="r-copy" class="card" style="margin-top:16px"></p>
+ <div class="stats" id="r-stats"></div>
+ <div class="card" id="sens"><h2>Sensitivity: real ROI</h2><div style="overflow-x:auto"><table id="sens-table"></table></div><p class="note" id="sens-cap"></p></div>
+ <div class="card" id="questions"><h2>Three questions to ask your team this week</h2><ol id="q-list"></ol></div>
+ <p class="note">How you compare with other companies: <i>coming soon</i>.</p>
+ <p class="note">An estimate based on the numbers you entered. Not financial advice.</p>
+ <div class="row noprint" style="margin-top:12px">
+  <button class="btn ghost" type="button" id="print">Download PDF</button>
+  <button class="btn ghost" type="button" id="save">Save your results</button>
+ </div>
+ <p class="note noprint" id="save-out"></p>
+ <div class="noprint" style="margin-top:16px"><button class="btn ghost" type="button" id="edit">Edit inputs</button></div>
+</section>
+</main>
+<footer><a href="/privacy/">Privacy</a> · Work3</footer>
+</div>
+
+<div id="banner" class="hidden" role="dialog" aria-label="Cookie consent">
+ <p>We use the Meta pixel to measure our ads. It loads only if you accept. The calculator works either way.</p>
+ <button class="btn" id="consent-yes" type="button">Accept</button>
+ <button class="btn ghost" id="consent-no" type="button">Decline</button>
+</div>
+
+<script src="roi.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

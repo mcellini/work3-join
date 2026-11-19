@@ -1,0 +1,14 @@
+{
+  "onPaper": "On paper, your AI tools return <b>{declaredRoi}</b>. Based on actual usage, it's <b>{realRoi}</b>. The gap is <b>{valueGap}</b> a year, and <b>{unused}</b> goes on seats nobody uses weekly. To break even, each active user needs to save <b>{breakEven} h/week</b>.",
+  "onPaperNoCost": "Based on the numbers you entered, declared usage would create <b>{vd}</b> of value a year and actual usage <b>{va}</b>. With no cost entered, no ROI percentage is shown.",
+  "noActive": "No active users means no return yet.",
+  "illusion": "That's the adoption illusion: the money is spent on licences, but the value depends on usage.",
+  "aaGtAd": "Note: actual adoption is higher than declared adoption. Double-check the two numbers; results are shown as entered.",
+  "sensCaption": "Real ROI is most sensitive to hours saved and how much of that time is redeployed. Both are your estimates.",
+  "questions": [
+    "What share of seats were active in the last 7 days, per the admin console, not per the vendor deck?",
+    "What did the saved hours get redeployed to? If nothing, what is R really?",
+    "Which 20% of seats could be reassigned or dropped at the next renewal?"
+  ],
+  "onPaperNoGap": "On paper, your AI tools return <b>{declaredRoi}</b>. Based on actual usage, it's <b>{realRoi}</b>. <b>{unused}</b> goes on seats not used weekly. To break even, each active user needs to save <b>{breakEven} h/week</b>."
+}
